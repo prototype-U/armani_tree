@@ -1,0 +1,94 @@
+# Copyright (C) 2009 The Android Open Source Project
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+#
+# This file sets variables that control the way modules are built
+# thorughout the system. It should not be used to conditionally
+# disable makefiles (the proper mechanism to control what gets
+# included in a build is to use PRODUCT_PACKAGES in a product
+# definition file).
+#
+
+# WARNING: This line must come *before* including the proprietary
+# variant, so that it gets overwritten by the parent (which goes
+# against the traditional rules of inheritance).
+
+# Inherit from the proprietary version
+TARGET_BOARD_PLATFORM_GPU := qcom-adreno200
+
+TARGET_SPECIFIC_HEADER_PATH := device/lenovo/armani/include
+
+# Architecture
+TARGET_ARCH := arm
+TARGET_ARCH_VARIANT := armv7-a-neon
+TARGET_CPU_ABI := armeabi-v7a
+TARGET_CPU_ABI2 := armeabi
+TARGET_CPU_SMP := true
+
+# Flags
+COMMON_GLOBAL_CFLAGS += -DQCOM_HARDWARE
+
+# Preload bootanimation
+TARGET_BOOTANIMATION_PRELOAD := true
+
+# QCOM hardware
+BOARD_USES_QCOM_HARDWARE := true
+
+# Graphics
+COMMON_GLOBAL_CFLAGS += -DQCOM_NO_SECURE_PLAYBACK
+USE_OPENGL_RENDERER := true
+TARGET_NO_HW_VSYNC := true
+TARGET_USES_C2D_COMPOSITION := true
+TARGET_USES_ION := true
+BOARD_EGL_CFG := device/lenovo/armani/configs/egl.cfg
+TARGET_QCOM_DISPLAY_VARIANT := legacy
+TARGET_PROVIDES_LIBLIGHT := true
+# Bootloader
+TARGET_BOOTLOADER_BOARD_NAME := armani
+
+# Kernel
+BOARD_KERNEL_CMDLINE := androidboot.hardware=qcom loglevel=1 vmalloc=200M
+BOARD_KERNEL_BASE := 0x00200000
+BOARD_KERNEL_PAGESIZE := 4096
+TARGET_KERNEL_SOURCE := kernel/lenovo/armani
+TARGET_KERNEL_CONFIG := armani_defconfig
+
+# Boot animation
+TARGET_SCREEN_HEIGHT := 854
+TARGET_SCREEN_WIDTH := 480
+
+# QCOM GPS
+#BOARD_VENDOR_QCOM_GPS_LOC_API_AMSS_VERSION := 50000
+#BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE := ville
+
+# Lights
+TARGET_PROVIDES_LIBLIGHTS := true
+
+# Filesystem
+TARGET_USERIMAGES_USE_EXT4 := true
+BOARD_BOOTIMAGE_PARTITION_SIZE := 13576
+BOARD_RECOVERYIMAGE_PARTITION_SIZE := 13576
+BOARD_SYSTEMIMAGE_PARTITION_SIZE := 972800
+BOARD_USERDATAIMAGE_PARTITION_SIZE := 959488
+BOARD_FLASH_BLOCK_SIZE := 131072
+TARGET_USERIMAGES_USE_EXT4 := true
+
+# Vold
+BOARD_VOLD_EMMC_SHARES_DEV_MAJOR := true
+#TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/class/android_usb/android0/f_mass_storage/lun%d/file
+TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/class/android_usb/f_mass_storage/lun0/file
+TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/class/android_usb/f_mass_storage/lun1/file
+
+# Use power button as select in recovery
+BOARD_HAS_NO_SELECT_BUTTON := true
