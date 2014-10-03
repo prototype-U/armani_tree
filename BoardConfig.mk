@@ -92,3 +92,5 @@ TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/class/android_usb/f_mass_storage/lun1/fi
 
 # Use power button as select in recovery
 BOARD_HAS_NO_SELECT_BUTTON := true
+
+TARGET_QCOM_DISPLAY_VARIANT := legacy
